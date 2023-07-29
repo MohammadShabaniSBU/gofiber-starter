@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  app: 
+    image: cosmtrek/air:latest
+    restart: always
+    container_name: mass-media
+    working_dir: /app
+    environment:
+      - GOPROXY=https://goproxy.io,direct 
+    volumes:
+      - .:/app 
+    networks:
+      - postgres-network
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+
+networks:
+  postgres-network:
+    name: postgres-network
+    external: true
